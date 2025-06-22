@@ -18,7 +18,7 @@ const ProductSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  image: {
+  image:[{
     public_id: {
       type: String,
       required: true,
@@ -27,7 +27,7 @@ const ProductSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-  },
+  }],
   category: {
     type: String,
     required: [true, "Please enter category for product!!!"],
@@ -57,8 +57,13 @@ const ProductSchema = new mongoose.Schema({
         required: true,
       },
     },
-  ]
-},{
+  ],
+  user:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:"User"
+  }
+},
+{
     timestamps:true
 });
 
