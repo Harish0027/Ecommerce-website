@@ -19,6 +19,7 @@ const ProductController = {
         success: true,
         data: products,
         count: productCount,
+        resultPerPage,
         message: "All products fetched successfully",
       });
     } catch (error) {
