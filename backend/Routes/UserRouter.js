@@ -7,10 +7,10 @@ const UserRouter=express.Router();
 
 UserRouter.post("/register",UserController.register);
 UserRouter.post("/login",UserController.login);
-UserRouter.post("/logot",UserController.logout);
+UserRouter.post("/logout",UserController.logout);
 UserRouter.post("/password/forgot",UserController.forgotPassword);
 UserRouter.put("/password/reset/:token",UserController.forgotPassword);
-UserRouter.get("/me",UserAuthenticated,UserController.getUserDetail);
+UserRouter.get("/me",UserAuthenticated,UserController.getUserProfile);
 UserRouter.put("/password/updatePassword",UserAuthenticated,UserController.updatePassword);
 UserRouter.put("/me/update",UserAuthenticated,UserController.updateProfile);
 
