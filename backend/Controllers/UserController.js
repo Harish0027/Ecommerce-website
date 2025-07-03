@@ -2,44 +2,67 @@ const User = require("../Model/UserModel");
 const ErrorHandler = require("../utils/ErrorHandler");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/SendMail.js");
+const cloudinary=require("cloudinary");
+
+
 const UserController = {
-  register: async (req, res, next) => {
+  // backend/controllers/UserController.js
+
+register : async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
+    const file = req.files?.avatar;
+
+    if (!file) {
+      return res.status(400).json({ message: "Avatar is required" });
+    }
+
+    const myCloud = await cloudinary.uploader.upload(file.tempFilePath, {
+      folder: "avatars",
+      width: 150,
+      crop: "scale",
+    });
+
+    const user = await User.create({
+      name,
+      email,
+      password,
+      avatar: {
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
+      },
+    });
+
+    res.status(201).json({ success: true, user });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ success: false, message: "User registration failed!!" });
+  }
+},
+
+  login: async (req, res, next) => {
     try {
-      const { name, email, password } = req.body;
+      const { email, password } = req.body;
 
-      const newUser = await User.create({
-        name,
-        email,
-        password,
-        avatar: {
-          public_id: "temp_url.jpg",
-          url: "temp_img.jpg",
-        },
-      });
+      if (!email || !password) {
+        return next(new ErrorHandler("All fields are required!!", 401));
+      }
+      const currentUser = await User.findOne({ email }).select("+password");
 
-      sendToken(newUser, 201, res);
+      if (!currentUser) {
+        return next(new ErrorHandler("Invalid Email or password", 401));
+      }
+      const isSame = await currentUser.comparePassword(password);
+
+      if (!isSame) {
+        return next(new ErrorHandler("Invalid Email or password", 401));
+      }
+
+      sendToken(currentUser, 200, res);
     } catch (error) {
       return next(new ErrorHandler("User registration failed!!", 500));
     }
-  },
-  login: async (req, res, next) => {
-    const { email, password } = req.body;
-
-    if (!email || !password) {
-      return next(new ErrorHandler("All fields are required!!", 401));
-    }
-    const currentUser = await User.findOne(email).select("+password");
-
-    if (!currentUser) {
-      return next(new ErrorHandler("Invalid Email or password", 401));
-    }
-    const isSame = await currentUser.comparePassword(password);
-
-    if (!isSame) {
-      return next(new ErrorHandler("Invalid Email or password", 401));
-    }
-
-    sendToken(currentUser, 200, res);
   },
   logout: async (req, res, next) => {
     try {
@@ -132,9 +155,9 @@ const UserController = {
       return next(new ErrorHandler("Failed to reset password", 500));
     }
   },
-  getUserDetail: async (req, res, next) => {
+  getUserProfile: async (req, res, next) => {
     try {
-      const currentUser = await User.findOne({ email: req.user.id });
+      const currentUser = req.user;
       if (!currentUser) {
         return next(new ErrorHandler("User not found", 404));
       }
@@ -168,22 +191,46 @@ const UserController = {
       return next(new ErrorHandler("Failed to update password!!!", 500));
     }
   },
-  updateProfile: async (req, res, next) => {
-    try {
-      const user = await User.findByIdAndUpdate(req.user._id, req.body, {
-        new: true,
-        runValidators: true,
+
+updateProfile : async (req, res, next) => {
+  try {
+    const { name, email, avatar } = req.body;
+    const user = await User.findById(req.user._id);
+
+    const updateData = { name, email };
+
+    if (avatar) {
+      // Delete old avatar if it exists
+      if (user.avatar?.public_id) {
+        await cloudinary.uploader.destroy(user.avatar.public_id);
+      }
+
+      // Upload new avatar from base64
+      const uploadRes = await cloudinary.uploader.upload(avatar, {
+        folder: "avatars",
       });
 
-      return res.status(200).json({
-        message: "User profile updated successfully!!!",
-        user: user,
-        success: true,
-      });
-    } catch (error) {
-      return next(new ErrorHandler("Failed to update Profile!!!", 500));
+      updateData.avatar = {
+        public_id: uploadRes.public_id,
+        url: uploadRes.secure_url,
+      };
     }
-  },
+
+    const updatedUser = await User.findByIdAndUpdate(req.user._id, updateData, {
+      new: true,
+      runValidators: true,
+    });
+
+    return res.status(200).json({
+      message: "Profile updated successfully",
+      user: updatedUser,
+      success: true,
+    });
+  } catch (error) {
+    return next(new ErrorHandler("Failed to update profile", 500));
+  }
+},
+
   getAllUsers: async (req, res, next) => {
     try {
       const users = await User.find();
@@ -215,15 +262,15 @@ const UserController = {
   },
   updateUserbyAdmin: async (req, res, next) => {
     try {
-      const newData={
-        name:req.body.name,
-        email:req.body.email,
-        role:req.body.role
-      }
-      const user=await User.findByIdAndUpdate(req.params.id,newData,{
-        new:true,
-        runValidators:true
-      })
+      const newData = {
+        name: req.body.name,
+        email: req.body.email,
+        role: req.body.role,
+      };
+      const user = await User.findByIdAndUpdate(req.params.id, newData, {
+        new: true,
+        runValidators: true,
+      });
       if (!user) {
         return next(new ErrorHandler("User does not exists with this Id", 404));
       }
@@ -240,11 +287,11 @@ const UserController = {
   deleteUserByAdmin: async (req, res, next) => {
     try {
       const user = await User.findByIdAndDelete(req.params.id);
-  
+
       if (!user) {
         return next(new ErrorHandler("User does not exist with this ID", 404));
       }
-  
+
       return res.status(200).json({
         success: true,
         message: "User deleted successfully!",
@@ -252,7 +299,7 @@ const UserController = {
     } catch (error) {
       return next(new ErrorHandler("Failed to delete user", 500));
     }
-  }  
+  },
 };
 
 module.exports = UserController;

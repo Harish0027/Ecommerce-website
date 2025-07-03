@@ -48,7 +48,7 @@ const ProductController = {
         req.body,
         {
           new: true,
-          runValidators: true,
+          runValidators: true
         }
       );
 
