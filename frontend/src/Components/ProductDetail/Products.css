@@ -1,0 +1,135 @@
+.productsHeading {
+  text-align: center;
+  font-size: 2vmax;
+  margin: 2vmax 0;
+  font-weight: 600;
+}
+
+.productContainer {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 2vmax;
+  flex-wrap: wrap;
+}
+
+/* Sidebar filter */
+.filterBox {
+  flex-shrink: 0;
+  width: 250px;
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.filterBox label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: block;
+  margin-top: 1rem;
+  color: #333;
+}
+
+.filterBox input[type="range"] {
+  width: 100%;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  accent-color: tomato;
+}
+
+/* Products Grid */
+.products {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: flex-start;
+}
+
+/* Pagination styles */
+.paginationBox {
+  display: flex;
+  justify-content: center;
+  margin: 6vmax;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.page-item {
+  background-color: white;
+  list-style: none;
+  border: 1px solid rgba(0, 0, 0, 0.178);
+  padding: 1vmax 1.5vmax;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.page-item:first-child {
+  border-radius: 5px 0 0 5px;
+}
+
+.page-item:last-child {
+  border-radius: 0 5px 5px 0;
+}
+
+.page-link {
+  text-decoration: none;
+  font: 300 0.7vmax "Roboto";
+  color: rgb(80, 80, 80);
+  transition: all 0.3s;
+}
+
+.page-item:hover {
+  background-color: rgb(230, 230, 230);
+}
+
+.page-item:hover .page-link {
+  color: rgb(0, 0, 0);
+}
+
+.pageItemActive {
+  background-color: tomato;
+  border: 1px solid tomato;
+}
+
+.pageLinkActive {
+  color: white;
+  font-weight: bold;
+}
+.categoryBox {
+  margin-top: 2rem;
+}
+
+.categoryBox h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.categoryBox ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.categoryBox li {
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  color: #555;
+  transition: color 0.2s;
+  font-size: 0.95rem;
+}
+
+.categoryBox li:hover {
+  color: tomato;
+}
+
+.categoryBox li.active {
+  color: tomato;
+  font-weight: bold;
+}

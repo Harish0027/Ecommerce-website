@@ -1,10 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { productReducer } from "./Reducers/ProductReducers";
+import { productDetailReducer, productReducer } from "./Reducers/ProductReducers";
+import { loadUserReducer, UserLoginReducer, UserRegisterReducer ,logOutUserReducer,updateUserReducer} from "./Reducers/UserReducers";
 
 const store = configureStore({
   reducer: {
-    product:productReducer
-  },
+    product:productReducer,
+    productDetail:productDetailReducer,
+    userRegister:UserRegisterReducer,
+    userLogin:UserLoginReducer,
+    currentLoggedUser:loadUserReducer,
+    userLogout:logOutUserReducer,
+    updateUser:updateUserReducer
+    },
   // No need for middleware unless you're adding custom ones
 });
 

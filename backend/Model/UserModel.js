@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please enter a password"],
     minLength: [8, "Password should be at least 8 characters"],
-    select:false
+    select:false,
   },
   avatar: {
     public_id: {
@@ -44,13 +44,14 @@ const UserSchema = new mongoose.Schema({
 });
 
 // password ecrypted
-UserSchema.pre("save", async (next) => {
+UserSchema.pre("save", async function(next) {
   if (!this.isModified("password")) {
     return next();
   }
   this.password = await bcrypt.hash(this.password, 10);
   next();
 });
+
 
 // jwt token creating
 UserSchema.methods.getJWTtoken = function () {

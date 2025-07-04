@@ -1,0 +1,78 @@
+#footer {
+  margin-top: 10vmax;
+  padding: 3vmax 2vmax;
+  background-color: #222; /* darker, subtler gray */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap; /* makes footer responsive */
+  color: #eee; /* light text on dark bg */
+  font-size: 0.9rem;
+}
+
+.leftFooter, .midFooter, .rightFooter {
+  margin: 1vmax;
+}
+
+.leftFooter {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.leftFooter h4 {
+  margin-bottom: 0.5rem;
+}
+
+.leftFooter p {
+  text-align: center;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.leftFooter img {
+  width: 8vmax;
+  max-width: 120px;
+  margin: 0.5rem;
+  cursor: pointer;
+  filter: brightness(0) invert(1); /* white icons, if needed */
+}
+
+.midFooter {
+  flex: 2 1 300px;
+  text-align: center;
+}
+
+.midFooter h1 {
+  font-size: 3rem;
+  color: crimson;
+  margin-bottom: 0.5rem;
+}
+
+.midFooter p {
+  max-width: 80%;
+  margin: 0.5rem auto;
+  line-height: 1.5;
+}
+
+.rightFooter {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.rightFooter h4 {
+  margin-bottom: 0.5rem;
+}
+
+.rightFooter a {
+  color: #eee;
+  text-decoration: none;
+  margin: 0.3rem 0;
+  transition: color 0.2s;
+}
+
+.rightFooter a:hover {
+  color: crimson;
+}
