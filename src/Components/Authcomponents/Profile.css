@@ -1,0 +1,119 @@
+.profileContainer {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background: white;
+  justify-content: center;
+  align-items: center;
+  gap: 5vmax;
+  padding: 2vmax;
+  box-sizing: border-box;
+}
+
+.leftSection,
+.rightSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Left Section */
+.leftSection > h1 {
+  color: rgba(0, 0, 0, 0.7);
+  font: 500 2.5vmax "Roboto";
+  margin-bottom: 2vmax;
+}
+
+.leftSection > img {
+  width: 20vmax;
+  height: 20vmax;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.5s;
+}
+
+.leftSection > img:hover {
+  transform: scale(1.05);
+}
+
+.leftSection > a {
+  margin-top: 2vmax;
+  padding: 0.8vmax 2vmax;
+  font: 400 1vmax "Roboto";
+  background-color: tomato;
+  color: white;
+  text-decoration: none;
+  border: none;
+  transition: background-color 0.5s;
+}
+
+.leftSection > a:hover {
+  background-color: rgb(204, 78, 56);
+}
+
+/* Right Section */
+.rightSection {
+  align-items: flex-start;
+  width: 40%;
+}
+
+.profileDetails h4 {
+  font: 400 1.4vmax "Roboto";
+  margin: 1vmax 0 0.3vmax;
+}
+
+.profileDetails p {
+  font: 400 1.2vmax cursive;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0.2vmax 0 1vmax;
+}
+
+.profileActions {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 2vmax;
+}
+
+.profileActions > a {
+  padding: 0.8vmax;
+  font: 400 1vmax "Roboto";
+  background-color: rgb(68, 68, 68);
+  color: white;
+  text-align: center;
+  margin-bottom: 1vmax;
+  text-decoration: none;
+  transition: background-color 0.5s;
+}
+
+.profileActions > a:hover {
+  background-color: rgb(31, 31, 31);
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+  .profileContainer {
+    flex-direction: column;
+    padding: 4vmax 2vmax;
+  }
+
+  .leftSection > h1 {
+    font: 500 3vmax "Roboto";
+  }
+
+  .leftSection > a {
+    font: 400 1.5vmax "Roboto";
+  }
+
+  .profileDetails h4 {
+    font: 400 2vmax "Roboto";
+  }
+
+  .profileDetails p {
+    font: 400 1.5vmax cursive;
+  }
+
+  .profileActions > a {
+    font: 400 1.5vmax "Roboto";
+  }
+}

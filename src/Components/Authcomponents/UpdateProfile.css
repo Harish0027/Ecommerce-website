@@ -1,0 +1,33 @@
+.updateProfileContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+.updateProfileForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1vmax;
+  width: 30vmax;
+  padding: 2vmax;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.updateProfileForm h2 {
+  text-align: center;
+}
+
+.updateImage img {
+  width: 5vmax;
+  border-radius: 50%;
+  margin-bottom: 1vmax;
+}
+
+.updateBtn {
+  padding: 0.7vmax;
+  background-color: tomato;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
