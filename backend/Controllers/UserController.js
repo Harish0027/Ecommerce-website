@@ -2,44 +2,45 @@ const User = require("../Model/UserModel");
 const ErrorHandler = require("../utils/ErrorHandler");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/SendMail.js");
-const cloudinary=require("cloudinary");
-
+const cloudinary = require("cloudinary");
 
 const UserController = {
   // backend/controllers/UserController.js
 
-register : async (req, res) => {
-  try {
-    const { name, email, password } = req.body;
+  register: async (req, res) => {
+    try {
+      const { name, email, password } = req.body;
 
-    const file = req.files?.avatar;
+      const file = req.files?.avatar;
 
-    if (!file) {
-      return res.status(400).json({ message: "Avatar is required" });
+      if (!file) {
+        return res.status(400).json({ message: "Avatar is required" });
+      }
+
+      const myCloud = await cloudinary.uploader.upload(file.tempFilePath, {
+        folder: "avatars",
+        width: 150,
+        crop: "scale",
+      });
+
+      const user = await User.create({
+        name,
+        email,
+        password,
+        avatar: {
+          public_id: myCloud.public_id,
+          url: myCloud.secure_url,
+        },
+      });
+
+      res.status(201).json({ success: true, user });
+    } catch (error) {
+      console.error("Error:", error);
+      res
+        .status(500)
+        .json({ success: false, message: "User registration failed!!" });
     }
-
-    const myCloud = await cloudinary.uploader.upload(file.tempFilePath, {
-      folder: "avatars",
-      width: 150,
-      crop: "scale",
-    });
-
-    const user = await User.create({
-      name,
-      email,
-      password,
-      avatar: {
-        public_id: myCloud.public_id,
-        url: myCloud.secure_url,
-      },
-    });
-
-    res.status(201).json({ success: true, user });
-  } catch (error) {
-    console.error("Error:", error);
-    res.status(500).json({ success: false, message: "User registration failed!!" });
-  }
-},
+  },
 
   login: async (req, res, next) => {
     try {
@@ -173,63 +174,69 @@ register : async (req, res) => {
   updatePassword: async (req, res, next) => {
     try {
       const user = await User.findById(req.user._id).select("+password");
-      const { oldPassword, newPassword, confirmedPassword } = req.body;
+      const { oldPassword, newPassword, confirmPassword } = req.body;
 
-      if (user.comparePassword(oldPassword)) {
-        return new ErrorHandler("Entered old password is incorrect", 400);
+      const isMatch = await user.comparePassword(oldPassword);
+      if (!isMatch) {
+        return next(new ErrorHandler("Entered old password is incorrect", 400));
       }
 
-      if (newPassword !== confirmedPassword) {
-        return new ErrorHandler("Password does not match!!!", 400);
+      if (newPassword !== confirmPassword) {
+        return next(new ErrorHandler("Passwords do not match!", 400));
       }
 
       user.password = newPassword;
       await user.save();
 
-      sendToken(user, 200, res);
+      sendToken(user, 200, res); // Optionally re-login the user
     } catch (error) {
-      return next(new ErrorHandler("Failed to update password!!!", 500));
+      return next(new ErrorHandler("Failed to update password!", 500));
     }
   },
+  updateProfile: async (req, res, next) => {
+    try {
+      const { name, email, avatar } = req.body;
+      const user = await User.findById(req.user._id);
 
-updateProfile : async (req, res, next) => {
-  try {
-    const { name, email, avatar } = req.body;
-    const user = await User.findById(req.user._id);
+      const updateData = { name, email };
 
-    const updateData = { name, email };
+      if (avatar) {
+        // Delete old avatar if it exists
+        if (user.avatar?.public_id) {
+          await cloudinary.uploader.destroy(user.avatar.public_id);
+        }
 
-    if (avatar) {
-      // Delete old avatar if it exists
-      if (user.avatar?.public_id) {
-        await cloudinary.uploader.destroy(user.avatar.public_id);
+        // Upload new avatar from base64
+        const uploadRes = await cloudinary.uploader.upload(avatar, {
+          folder: "avatars",
+        });
+
+        updateData.avatar = {
+          public_id: uploadRes.public_id,
+          url: uploadRes.secure_url,
+        };
       }
 
-      // Upload new avatar from base64
-      const uploadRes = await cloudinary.uploader.upload(avatar, {
-        folder: "avatars",
+      const updatedUser = await User.findByIdAndUpdate(
+        req.user._id,
+        updateData,
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+
+      return res.status(200).json({
+        message: "Profile updated successfully",
+        user: updatedUser,
+        success: true,
       });
+    } catch (error) {
+  console.error("Update Profile Error:", error);
+  return next(new ErrorHandler("Failed to update profile", 500));
+}
 
-      updateData.avatar = {
-        public_id: uploadRes.public_id,
-        url: uploadRes.secure_url,
-      };
-    }
-
-    const updatedUser = await User.findByIdAndUpdate(req.user._id, updateData, {
-      new: true,
-      runValidators: true,
-    });
-
-    return res.status(200).json({
-      message: "Profile updated successfully",
-      user: updatedUser,
-      success: true,
-    });
-  } catch (error) {
-    return next(new ErrorHandler("Failed to update profile", 500));
-  }
-},
+  },
 
   getAllUsers: async (req, res, next) => {
     try {
