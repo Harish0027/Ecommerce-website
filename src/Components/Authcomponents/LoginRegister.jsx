@@ -2,14 +2,14 @@ import React, { Fragment, useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { useDispatch, useSelector } from "react-redux";
-import { login,register } from "../../Actions/UserActions.JSX";
+import { login, register } from "../../Actions/UserActions.JSX";
 import { CLEAR_ERRORS } from "../../Constants/UserConstants";
 
 const LoginSignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { user, loading, error, isAuthenticated } = useSelector(
+  const {  error, isAuthenticated } = useSelector(
     (state) => state.userLogin
   );
 
@@ -58,28 +58,24 @@ const LoginSignUp = () => {
 
   const loginSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.set("email", email);
-    formData.set("password", password);
-    dispatch(login({email:loginEmail,password:loginPassword}));
+    dispatch(login({ email: loginEmail, password: loginPassword }));
   };
 
   const registerDataChange = (e) => {
-  if (e.target.name === "avatar") {
-    const file = e.target.files[0];
+    if (e.target.name === "avatar") {
+      const file = e.target.files[0];
 
-    if (file) {
-      setAvatarPreview(URL.createObjectURL(file)); // For preview only
-      setAvatar(file); // Store the raw file object, NOT base64
+      if (file) {
+        setAvatarPreview(URL.createObjectURL(file)); // For preview only
+        setAvatar(file); // Store the raw file object, NOT base64
+      }
+    } else {
+      const { name, value } = e.target;
+      if (name === "name") setName(value);
+      if (name === "email") setEmail(value);
+      if (name === "password") setPassword(value);
     }
-  } else {
-    const { name, value } = e.target;
-    if (name === "name") setName(value);
-    if (name === "email") setEmail(value);
-    if (name === "password") setPassword(value);
-  }
-};
-
+  };
 
   const registerSubmit = (e) => {
     e.preventDefault();
