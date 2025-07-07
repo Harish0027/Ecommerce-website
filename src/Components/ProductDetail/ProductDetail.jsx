@@ -9,8 +9,10 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Loading from "../../Loader/Loading";
 import ReviewCard from "./ReviewCard";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
 const ProductDetail = () => {
+  const[quantity,setQuantity]=useState(1);
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -18,12 +20,26 @@ const ProductDetail = () => {
     (state) => state.productDetail
   );
 
+  const handleIncrement=()=>{
+    if(product.stock<=quantity) {
+      console.log("stock is"+product.stock)
+      toast("product out of stock!!!")
+      return;
+    }
+    setQuantity((prev)=>prev+1);
+  }
+  const handleDecrement=()=>{
+    setQuantity((prev)=>(prev===1?1:prev-1));
+  }
+
   useEffect(() => {
     if (error) {
       toast(error.message);
       dispatch(clearErrors());
     }
+    
     dispatch(getProductDetail(id));
+    console.log(product)
   }, [dispatch, error, id]);
 
   const options = {
@@ -72,9 +88,9 @@ const ProductDetail = () => {
 
             <div className="detailsBlock-3-1">
               <div className="detailsBlock-3-1-1">
-                <button>-</button>
-                <input value="1" type="number" readOnly />
-                <button>+</button>
+                <button onClick={handleDecrement}>-</button>
+                <input value={quantity} type="number" readOnly />
+                <button onClick={handleIncrement}>+</button>
               </div>
               <button>Add to Cart</button>
             </div>
