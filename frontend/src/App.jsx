@@ -12,6 +12,10 @@ import MyProfile from "./Components/Authcomponents/MyProfile";
 import ProtectedRoute from "./Route/ProtectedRoute";
 import UpdateProfile from "./Components/Authcomponents/UpdateProfile";
 import UpdatePassword from "./Components/Authcomponents/upDatePassword";
+import ForgotPassword from "./Components/Authcomponents/ForgotPassword";
+import Cart from "./Components/Cart/Cart";
+import Shipping from "./Components/Order/Shipping";
+import ConfirmOrder from "./Components/Order/ConfirmOrder";
 
 function App() {
   return (
@@ -25,10 +29,14 @@ function App() {
         <Route exact path={"/search"} element={<Search />} />
         <Route exact path={"/login"} element={<LoginSignUp />} />
         <Route exact path={"/account"} element={<Profile />} />
+        <Route exact path={"/password/forgot"} element={<ForgotPassword />} />
+        <Route exact path={"/shipping"} element={<Shipping/>} />
+          <Route exact path={"/order/confirm"} element={<ConfirmOrder/>} />
         <Route element={<ProtectedRoute />}>
-          <Route exact path={"/me/updatePass"} element={<UpdatePassword/>} />
+          <Route exact path={"/me/updatePass"} element={<UpdatePassword />} />
           <Route exact path={"/myaccount"} element={<MyProfile />} />
           <Route exact path={"/me/update"} element={<UpdateProfile />} />
+          <Route exact path={"/me/cart"} element={<Cart />} />
         </Route>
       </Routes>
       <Footer />

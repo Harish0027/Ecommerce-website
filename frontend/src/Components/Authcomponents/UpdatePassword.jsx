@@ -2,12 +2,16 @@ import React, { Fragment, useState, useEffect } from "react";
 import "./UpdatePassword.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { updateUserPassword } from "../../Actions/UserActions.JSX";
+import { UPDATE_PASSWORD_RESET } from "../../Constants/UserConstants";
 
 const UpdatePassword = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { error, isUpdated, loading } = useSelector((state) => state.updateUser);
+  const { error, isUpdated, loading } = useSelector(
+    (state) => state.updateUser
+  );
 
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -20,17 +24,20 @@ const UpdatePassword = () => {
 
     if (isUpdated) {
       navigate("/account");
+      dispatch({ type: UPDATE_PASSWORD_RESET });
     }
   }, [dispatch, error, isUpdated, navigate]);
 
   const updatePasswordSubmit = (e) => {
     e.preventDefault();
 
-    const passwords = {
+    const userData = {
       oldPassword,
       newPassword,
       confirmPassword,
     };
+
+    dispatch(updateUserPassword(userData));
   };
 
   return (
@@ -63,7 +70,12 @@ const UpdatePassword = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
 
-          <input type="submit" value="Update Password" className="updateBtn" disabled={loading} />
+          <input
+            type="submit"
+            value="Update Password"
+            className="updateBtn"
+            disabled={loading}
+          />
         </form>
       </div>
     </Fragment>

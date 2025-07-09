@@ -15,6 +15,12 @@ import {
   UPDATE_USER_REQUEST,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAIL,
+  UPDATE_PASSWORD_FAIL,
+  UPDATE_PASSWORD_SUCCESS,
+  UPDATE_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_FAIL
 } from "../Constants/UserConstants";
 
 export const register = (user) => async (dispatch) => {
@@ -114,3 +120,49 @@ export const updateUser = (userData) => async (dispatch) => {
     });
   }
 };
+
+
+export const updateUserPassword = (userData) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_PASSWORD_REQUEST });
+
+    const res = await axios.put(
+      "http://localhost:4000/api/v1/user/password/updatePassword",
+      userData,
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    );
+
+    dispatch({ type: UPDATE_PASSWORD_SUCCESS});
+  } catch (error) {
+    dispatch({
+      type: UPDATE_PASSWORD_FAIL,
+      payload: error.response?.data?.message || error.message,
+    });
+  }
+};
+
+export const forgotUserPassword = (userData) => async (dispatch) => {
+  try {
+    dispatch({ type: FORGOT_PASSWORD_REQUEST });
+
+    const res = await axios.post(
+      "http://localhost:4000/api/v1/user/password/forgot",
+      userData,
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    );
+
+    dispatch({ type: FORGOT_PASSWORD_SUCCESS,payload:res.data.message});
+  } catch (error) {
+    dispatch({
+      type: FORGOT_PASSWORD_FAIL,
+      payload: error.response?.data?.message || error.message,
+    });
+  }
+};
+

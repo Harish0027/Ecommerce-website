@@ -1,17 +1,20 @@
 import React, { Fragment, useRef, useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { useDispatch, useSelector } from "react-redux";
-import { login,register } from "../../Actions/UserActions.JSX";
+import { login, register } from "../../Actions/UserActions.JSX";
 import { CLEAR_ERRORS } from "../../Constants/UserConstants";
 
 const LoginSignUp = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const navigate = useNavigate();
 
-  const { user, loading, error, isAuthenticated } = useSelector(
-    (state) => state.userLogin
-  );
+  const redirectURL = location.search
+    ? location.search.split("=")[1]
+    : "/account";
+
+  const { error, isAuthenticated } = useSelector((state) => state.userLogin);
 
   const switcherTab = useRef(null);
   const loginTab = useRef(null);
@@ -26,17 +29,19 @@ const LoginSignUp = () => {
   const [avatar, setAvatar] = useState(null);
   const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
 
-  // Redirect if authenticated
   useEffect(() => {
-    if (error) {
-      alert(error);
-      dispatch({ type: CLEAR_ERRORS });
-    }
+  if (error) {
+    alert(error);
+    dispatch({ type: CLEAR_ERRORS });
+  }
+}, [error, dispatch]);
 
-    if (isAuthenticated) {
-      navigate("/account"); // redirect to profile or dashboard
-    }
-  }, [dispatch, error, isAuthenticated, navigate]);
+useEffect(() => {
+  if (isAuthenticated) {
+    navigate(redirectURL);
+  }
+}, [isAuthenticated, navigate, redirectURL]);
+
 
   const switchTabs = (e, tab) => {
     if (tab === "login") {
@@ -58,28 +63,23 @@ const LoginSignUp = () => {
 
   const loginSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.set("email", email);
-    formData.set("password", password);
-    dispatch(login({email:loginEmail,password:loginPassword}));
+    dispatch(login({ email: loginEmail, password: loginPassword }));
   };
 
   const registerDataChange = (e) => {
-  if (e.target.name === "avatar") {
-    const file = e.target.files[0];
-
-    if (file) {
-      setAvatarPreview(URL.createObjectURL(file)); // For preview only
-      setAvatar(file); // Store the raw file object, NOT base64
+    if (e.target.name === "avatar") {
+      const file = e.target.files[0];
+      if (file) {
+        setAvatarPreview(URL.createObjectURL(file));
+        setAvatar(file);
+      }
+    } else {
+      const { name, value } = e.target;
+      if (name === "name") setName(value);
+      if (name === "email") setEmail(value);
+      if (name === "password") setPassword(value);
     }
-  } else {
-    const { name, value } = e.target;
-    if (name === "name") setName(value);
-    if (name === "email") setEmail(value);
-    if (name === "password") setPassword(value);
-  }
-};
-
+  };
 
   const registerSubmit = (e) => {
     e.preventDefault();
@@ -105,12 +105,14 @@ const LoginSignUp = () => {
             <button ref={switcherTab}></button>
           </div>
 
+          {/* Login Form */}
           <form className="loginForm" ref={loginTab} onSubmit={loginSubmit}>
             <div className="loginEmail">
               <input
                 type="email"
                 placeholder="Email"
                 required
+                autoComplete="email"
                 value={loginEmail}
                 onChange={(e) => setLoginEmail(e.target.value)}
               />
@@ -121,15 +123,17 @@ const LoginSignUp = () => {
                 type="password"
                 placeholder="Password"
                 required
+                autoComplete="current-password"
                 value={loginPassword}
                 onChange={(e) => setLoginPassword(e.target.value)}
               />
             </div>
 
-            <Link to="/password/forgot">Forget Password ?</Link>
+            <Link to="/password/forgot">Forgot Password?</Link>
             <input type="submit" value="Login" className="loginBtn" />
           </form>
 
+          {/* Register Form */}
           <form
             className="signUpForm"
             ref={registerTab}
@@ -144,6 +148,7 @@ const LoginSignUp = () => {
                 name="name"
                 value={name}
                 onChange={registerDataChange}
+                autoComplete="name"
               />
             </div>
 
@@ -155,6 +160,7 @@ const LoginSignUp = () => {
                 name="email"
                 value={email}
                 onChange={registerDataChange}
+                autoComplete="email"
               />
             </div>
 
@@ -166,6 +172,7 @@ const LoginSignUp = () => {
                 name="password"
                 value={password}
                 onChange={registerDataChange}
+                autoComplete="new-password"
               />
             </div>
 

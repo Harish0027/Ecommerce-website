@@ -24,6 +24,10 @@ const Profile = () => {
       name: "my Account",
       path: "/myaccount",
     },
+    {
+      name: "cart",
+      path: "/me/cart",
+    },
   ];
 
   

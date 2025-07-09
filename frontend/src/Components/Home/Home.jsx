@@ -7,9 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProduct, clearErrors} from "../../Actions/ProductActions";
 import Loading from "../../Loader/Loading";
 import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const navigate=useNavigate();
 
   const {
     loading,
@@ -28,6 +30,9 @@ const Home = () => {
     dispatch(getProduct());
   }, [dispatch, error]);
 
+  const navigateCart=()=>{
+    navigate("/me/cart")
+  }
 
   return (
     <Fragment>
@@ -37,8 +42,8 @@ const Home = () => {
         <p>Welcome to Ecommerce</p>
         <h1>FIND AMAZING PRODUCTS BELOW</h1>
 
-        <a href="#container">
-          <button>Scroll</button>
+        <a>
+          <button onClick={navigateCart}>Scroll</button>
         </a>
       </div>
 

@@ -1,0 +1,139 @@
+/* Global Reset */
+* {
+  box-sizing: border-box;
+}
+
+.confirmOrderPage {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 2vmax;
+  gap: 2vmax;
+}
+
+/* Left Section: Shipping + Cart */
+.confirmOrderLeft {
+  flex: 1 1 60%;
+  background-color: white;
+  padding: 2vmax;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Right Section: Order Summary */
+.confirmOrderRight {
+  flex: 1 1 35%;
+  background-color: white;
+  padding: 2vmax;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-width: 280px;
+}
+
+.confirmshippingAreaBox p {
+  margin: 0.6vmax 0;
+  font-size: 1rem;
+}
+
+.confirmCartItemsContainer {
+  margin-top: 1.5vmax;
+}
+
+.cartItemCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1vmax 0;
+  gap: 1vmax;
+  flex-wrap: wrap;
+}
+
+.cartItemCard img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.cartItemCard a {
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+  flex: 1;
+}
+
+.orderSummaryDetails > div {
+  display: flex;
+  justify-content: space-between;
+  margin: 1vmax 0;
+  font-size: 1rem;
+}
+
+.orderSummaryTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2vmax 0 1vmax;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-top: 1px solid #ccc;
+  padding-top: 1vmax;
+}
+
+.paymentButton {
+  width: 100%;
+  padding: 1vmax;
+  background-color: tomato;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.paymentButton:hover {
+  background-color: tomato;
+}
+
+/* --------------------------- */
+/* ✅ RESPONSIVE DESIGN BELOW */
+/* --------------------------- */
+@media screen and (max-width: 768px) {
+  .confirmOrderPage {
+    flex-direction: column;
+    padding: 1.5vmax;
+  }
+
+  .confirmOrderLeft,
+  .confirmOrderRight {
+    flex: 1 1 100%;
+    padding: 1.5vmax;
+  }
+
+  .orderSummaryTotal {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5vmax;
+  }
+
+  .paymentButton {
+    font-size: 0.95rem;
+    padding: 1rem;
+  }
+
+  .cartItemCard {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5vmax;
+  }
+
+  .cartItemCard img {
+    width: 65px;
+    height: 65px;
+  }
+}

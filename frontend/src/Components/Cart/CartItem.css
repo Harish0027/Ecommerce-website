@@ -1,0 +1,79 @@
+.cartItemCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  padding: 1.2rem;
+  margin: 1rem 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(255, 99, 71, 0.2);
+  transition: transform 0.2s;
+}
+
+.cartItemCard:hover {
+  transform: scale(1.01);
+}
+
+.cartItemCard img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid tomato;
+}
+
+.cartItemCard > div {
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.cartItemCard a {
+  font-size: 1rem;
+  font-weight: bold;
+  color: tomato;
+  text-decoration: none;
+}
+
+.cartItemCard p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.cartItemCard button {
+  background-color: tomato;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.cartItemCard button:hover {
+  background-color: #e63900;
+}
+
+.cartQuantity {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cartQuantity input {
+  width: 40px;
+  height: 30px;
+  text-align: center;
+  border: 1px solid tomato;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.cartSubtotal {
+  font-weight: bold;
+  color: #222;
+  min-width: 80px;
+  text-align: right;
+}

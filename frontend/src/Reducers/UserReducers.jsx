@@ -20,6 +20,9 @@ import {
   UPDATE_PASSWORD_RESET,
   UPDATE_PASSWORD_SUCCESS,
   UPDATE_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_FAIL,
 } from "../Constants/UserConstants";
 
 export const UserLoginReducer = (
@@ -171,7 +174,6 @@ export const updateUserReducer = (
         ...state,
         loading: false,
         isUpdated: true,
-        updatedUser: action.payload,
       };
 
     case UPDATE_USER_FAIL:
@@ -189,6 +191,32 @@ export const updateUserReducer = (
         isUpdated: false,
       };
 
+    default:
+      return state;
+  }
+};
+
+export const forgotUserPasswordReducer = (
+  state = { isUpdated: false, error: null, loading: false ,message:""},
+  action
+) => {
+  switch (action.type) {
+    case FORGOT_PASSWORD_REQUEST:
+      return {
+        loading: true,
+      };
+    case FORGOT_PASSWORD_SUCCESS:
+      return {
+        loading: false,
+        isUpdated: true,
+        message:action.payload
+      };
+    case FORGOT_PASSWORD_FAIL:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
     default:
       return state;
   }
