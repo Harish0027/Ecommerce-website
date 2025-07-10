@@ -8,6 +8,9 @@ const OrderRouter=express.Router();
 OrderRouter.post('/placeOrder',UserAuthenticated,OrderController.createOrder);
 OrderRouter.get('/getOrder/:id',UserAuthenticated,OrderController.getOrder);
 
+//user
+OrderRouter.get('/myOrders',UserAuthenticated,OrderController.getMyOrders);
+
 //admin
 OrderRouter.get('/admin/getOrders',UserAuthenticated,AuthoriseRole("admin"),OrderController.getOrders);
 OrderRouter.put('/admin/updateOrder/:id',UserAuthenticated,AuthoriseRole("admin"),OrderController.updateOrder);
