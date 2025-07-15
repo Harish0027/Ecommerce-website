@@ -8,6 +8,7 @@ import { getProduct, clearErrors} from "../../Actions/ProductActions";
 import Loading from "../../Loader/Loading";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import Caresol from "./Carousal";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -38,13 +39,8 @@ const Home = () => {
     <Fragment>
       <MetaData title="ECOMMERCE" />
 
-      <div className="banner">
-        <p>Welcome to Ecommerce</p>
-        <h1>FIND AMAZING PRODUCTS BELOW</h1>
-
-        <a>
-          <button onClick={navigateCart}>Scroll</button>
-        </a>
+      <div className="banne">
+        <Caresol />
       </div>
 
       <h2 className="homeHeading">Featured Products</h2>

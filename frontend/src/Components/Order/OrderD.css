@@ -1,0 +1,175 @@
+/* Order Detail Container */
+.order-detail-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  color: #333;
+}
+
+/* Titles */
+.order-detail-container h2 {
+  font-size: 28px;
+  font-weight: 600;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+}
+
+.order-box section {
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+}
+
+.order-box h3 {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.order-box h4 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #ff6347;
+  font-weight: 500;
+}
+
+/* Paragraphs */
+.order-box p {
+  margin: 6px 0;
+  line-height: 1.5;
+  font-size: 15px;
+}
+
+.order-box strong {
+  color: #222;
+}
+
+/* Items List */
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 15px 0;
+  background-color: #f9f9f9;
+  padding: 12px;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+
+.order-item:hover {
+  transform: translateY(-2px);
+}
+
+.order-item img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* New Delivery Progress Bar */
+.progress-bar-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px 0;
+  padding: 10px 0;
+}
+
+.progress-step {
+  position: relative;
+  text-align: center;
+  flex: 1;
+  z-index: 1;
+}
+
+.progress-step .circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #ddd;
+  color: #555;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 10px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.progress-step.active .circle {
+  background-color: #ff6347;
+  color: #fff;
+}
+
+.progress-step span {
+  font-size: 14px;
+  font-weight: 500;
+  color: #888;
+}
+
+.progress-step.active span {
+  color: #ff6347;
+}
+
+.progress-line {
+  position: absolute;
+  top: 14px;
+  left: 15%;
+  width: 70%;
+  height: 4px;
+  background-color: #ddd;
+  z-index: 0;
+  border-radius: 2px;
+}
+
+.progress-step:nth-child(2).active ~ .progress-line {
+  background: linear-gradient(to right, #ff6347 0%, #ff6347 50%, #ddd 50%);
+}
+
+.progress-step:nth-child(3).active ~ .progress-line {
+  background: linear-gradient(to right, #ff6347 0%, #ff6347 100%);
+}
+
+
+/* Error / Loading */
+.error {
+  color: red;
+  font-weight: bold;
+  background: #ffe6e6;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.loading {
+  font-style: italic;
+  color: #666;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .order-detail-container {
+    padding: 15px;
+  }
+
+  .order-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order-item img {
+    width: 100%;
+    max-width: 150px;
+  }
+}
+
+
+

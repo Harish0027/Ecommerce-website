@@ -1,10 +1,24 @@
-import React from 'react'
-import ReactNavbar from 'overlay-navbar'
-import "./Header.css"
+import React from 'react';
+import "./Header.css";
+
 const Header = () => {
   return (
-    <div className='navbar'>Header</div>
-  )
-}
+    <div className='navbar'>
+      <img src='/logo.png' alt='logo' />
 
-export default Header
+      <div className="navbar-actions">
+        <button>
+          <i className="fa-regular fa-user"></i>
+          Sign up
+        </button>
+
+        <div className="cart-item">
+          <i className="fa-solid fa-cart-shopping"></i>
+          Cart
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Header;

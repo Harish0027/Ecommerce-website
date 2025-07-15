@@ -1,78 +1,94 @@
-#footer {
-  margin-top: 10vmax;
-  padding: 3vmax 2vmax;
-  background-color: #222; /* darker, subtler gray */
+/* Footer.css */
+
+.footer {
+  background-color: #011a20;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #e5e7eb;
+  color: white;
+}
+
+.footer-upper {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap; /* makes footer responsive */
-  color: #eee; /* light text on dark bg */
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-logo-section {
+  flex: 1 1 250px;
+}
+
+.footer-logo-section img {
+  height: 40px;
+  object-fit: contain;
+}
+
+.footer-logo-text {
+  margin-top: 1rem;
   font-size: 0.9rem;
+  color: #ccc;
 }
 
-.leftFooter, .midFooter, .rightFooter {
-  margin: 1vmax;
+.footer-links-section {
+  flex: 1 1 150px;
 }
 
-.leftFooter {
-  flex: 1 1 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.leftFooter h4 {
-  margin-bottom: 0.5rem;
-}
-
-.leftFooter p {
-  text-align: center;
+.footer-links-section p {
+  font-weight: 600;
   margin-bottom: 1rem;
-  line-height: 1.4;
+  font-size: 1rem;
 }
 
-.leftFooter img {
-  width: 8vmax;
-  max-width: 120px;
-  margin: 0.5rem;
+.footer-links-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links-section li {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  color: #ddd;
   cursor: pointer;
-  filter: brightness(0) invert(1); /* white icons, if needed */
-}
-
-.midFooter {
-  flex: 2 1 300px;
-  text-align: center;
-}
-
-.midFooter h1 {
-  font-size: 3rem;
-  color: crimson;
-  margin-bottom: 0.5rem;
-}
-
-.midFooter p {
-  max-width: 80%;
-  margin: 0.5rem auto;
-  line-height: 1.5;
-}
-
-.rightFooter {
-  flex: 1 1 200px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  transition: color 0.3s ease;
 }
 
-.rightFooter h4 {
-  margin-bottom: 0.5rem;
+.footer-links-section li i {
+  margin-right: 8px;
 }
 
-.rightFooter a {
-  color: #eee;
+.footer-links-section li:hover {
+  color: #e54016;
+}
+
+.footer-lower {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1.5rem;
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+.footer-lower-links {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.footer-lower-links a {
   text-decoration: none;
-  margin: 0.3rem 0;
-  transition: color 0.2s;
+  color: white;
+  transition: color 0.3s ease;
 }
 
-.rightFooter a:hover {
-  color: crimson;
+.footer-lower-links a:hover {
+  color: #e54016;
 }

@@ -13,7 +13,7 @@ const Shipping = () => {
 
   const [address, setAddress] = useState(shippingInfo.address || "");
   const [city, setCity] = useState(shippingInfo.city || "");
-  const [pincode, setPincode] = useState(shippingInfo.pincode || "");
+  const [pinCode, setpinCode] = useState(shippingInfo.pinCode || "");
   const [phoneNo, setPhoneNo] = useState(shippingInfo.phoneNo || "");
   const [country, setCountry] = useState(shippingInfo.country || "");
   const [state, setState] = useState(shippingInfo.state || "");
@@ -25,7 +25,7 @@ const Shipping = () => {
     console.log({
       address,
       city,
-      pincode,
+      pinCode,
       phoneNo,
       country,
       state,
@@ -36,7 +36,7 @@ const Shipping = () => {
       const shippingData={
         address,
       city,
-      pincode,
+      pinCode,
       phoneNo,
       country,
       state,
@@ -80,14 +80,14 @@ const Shipping = () => {
               />
             </div>
 
-            {/* Pincode */}
+            {/* pinCode */}
             <div className="inputGroup">
               <input
                 type="text"
-                placeholder="Pincode"
+                placeholder="pinCode"
                 required
-                value={pincode}
-                onChange={(e) => setPincode(e.target.value)}
+                value={pinCode}
+                onChange={(e) => setpinCode(e.target.value)}
               />
             </div>
 

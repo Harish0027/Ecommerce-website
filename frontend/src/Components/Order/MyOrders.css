@@ -1,0 +1,121 @@
+.myOrdersContainer {
+  padding: 2vmax;
+  background-color: #f9f9f9;
+  min-height: 80vh;
+}
+
+h2 {
+  margin-bottom: 2vmax;
+  text-align: center;
+  color: #333;
+  font-size: 2vmax;
+}
+
+.orderCard {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5vmax;
+  margin-bottom: 2vmax;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.orderHeader span {
+  display: block;
+  margin: 0.5vmax 0;
+  font-size: 1.1vmax;
+  color: #444;
+}
+
+.itemsContainer {
+  border-top: 1px solid #ddd;
+  margin-top: 1vmax;
+  padding-top: 1vmax;
+}
+
+.itemRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1vmax;
+  flex-wrap: wrap;
+}
+
+.itemRow img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  margin-right: 1vmax;
+  border-radius: 4px;
+}
+
+.itemRow div {
+  flex: 1;
+  min-width: 200px;
+}
+
+.itemRow p {
+  margin: 0.2vmax 0;
+  font-size: 1vmax;
+}
+
+.viewBtn {
+  display: inline-block;
+  margin-top: 1vmax;
+  background-color: #007bff;
+  color: white;
+  padding: 0.6vmax 1.2vmax;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: 0.3s ease;
+  font-size: 1vmax;
+}
+
+.viewBtn:hover {
+  background-color: #0056b3;
+}
+
+/* ----------- RESPONSIVE STYLES ----------- */
+@media screen and (max-width: 768px) {
+  .orderCard {
+    padding: 4vw;
+  }
+
+  .orderHeader span {
+    font-size: 1.3rem;
+  }
+
+  .itemRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .itemRow img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 1vw;
+  }
+
+  .viewBtn {
+    font-size: 1rem;
+    padding: 1vw 2vw;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .orderHeader span {
+    font-size: 1.1rem;
+  }
+
+  .itemRow img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .viewBtn {
+    width: 100%;
+    text-align: center;
+  }
+}

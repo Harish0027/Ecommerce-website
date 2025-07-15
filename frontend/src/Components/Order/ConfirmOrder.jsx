@@ -22,7 +22,15 @@ const ConfirmOrder = () => {
   });
 
   const proceedToPayment=()=>{
-    navigate("/order/makePayment")
+    const data = {
+    grandTotal,
+    shippingCharges,
+    tax,
+    totalPrice,
+  };
+
+  sessionStorage.setItem("orderInfo", JSON.stringify(data));
+    navigate("/order/proceedPayment")
   }
   return (
     <div className="confirmOrderPage">

@@ -14,7 +14,7 @@ const Profile = () => {
   const data = [
     {
       name: "Orders",
-      path: "/orders",
+      path: "/me/orders",
     },
     {
       name: "Logout",

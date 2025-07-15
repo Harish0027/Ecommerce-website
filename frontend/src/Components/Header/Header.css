@@ -1,3 +1,58 @@
-.navbar{
-    height:100px;
+/* Header.css */
+
+.navbar {
+  height: 70px;
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  font-family: sans-serif;
+}
+
+.navbar img {
+  height: 50px;
+  object-fit: contain;
+}
+
+/* Right side: Sign up and cart grouped */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Sign up button */
+.navbar button {
+  background-color: #ff6347;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.navbar button:hover {
+  background-color: #e05239;
+}
+
+/* Cart icon + label */
+.cart-item {
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
 }

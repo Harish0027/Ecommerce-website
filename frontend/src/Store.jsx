@@ -10,11 +10,15 @@ import {
   logOutUserReducer,
   updateUserReducer,
   forgotUserPasswordReducer,
+
 } from "./Reducers/UserReducers";
 import {
   cartReducer,
   shippingInfoReducer,
 } from "./Reducers/CartReducer.JSX";
+import { MyOrdersReducer, OrderDetailsReducer, OrderReducer } from "./Reducers/OrderReducer";
+
+
 
 // STEP 1: Read from localStorage
 const initialCartItems = localStorage.getItem("cartItems")
@@ -38,6 +42,9 @@ const store = configureStore({
     forgotPassword: forgotUserPasswordReducer,
     cart: cartReducer,
     shipping: shippingInfoReducer,
+    order:OrderReducer,
+    myOrders:MyOrdersReducer,
+    orderDetail:OrderDetailsReducer
   },
   preloadedState: {
     cart: {

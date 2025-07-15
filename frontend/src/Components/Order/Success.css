@@ -1,0 +1,41 @@
+.successContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background: #f2f2f2;
+}
+
+.successCard {
+  background-color: white;
+  padding: 3vmax 4vmax;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.successCard h2 {
+  color: #28a745;
+  font-size: 2.2vmax;
+  margin-bottom: 1vmax;
+}
+
+.successCard p {
+  font-size: 1.2vmax;
+  margin-bottom: 2vmax;
+  color: #333;
+}
+
+.viewOrdersBtn {
+  text-decoration: none;
+  padding: 0.8vmax 2vmax;
+  background-color: #007bff;
+  color: white;
+  font-size: 1vmax;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.viewOrdersBtn:hover {
+  background-color: #0056b3;
+}
