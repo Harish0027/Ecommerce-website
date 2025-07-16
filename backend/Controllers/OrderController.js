@@ -1,5 +1,5 @@
 const Order = require("../Model/OrderModel");
-
+const ErrorHandler=require("../utils/ErrorHandler")
 const OrderController = {
   createOrder: async (req, res, next) => {
     try {
@@ -33,13 +33,31 @@ const OrderController = {
         order,
       });
     } catch (error) {
+      console.log(error)
       return next(new ErrorHandler("Failed to place order", 500));
     }
   },
+  getMyOrders: async (req, res, next) => {
+    try {
+      console.log(req.user)
+      const orders = await Order.find({ user: req.user._id });
 
+      res.status(200).json({
+        success: true,
+        message: "Orders fetched successfully!",
+        orders,
+      });
+    } catch (error) {
+      console.log(error)
+      return next(new ErrorHandler("Failed to fetch orders", 500));
+    }
+  },
   getOrder: async (req, res, next) => {
     try {
-      const order = await Order.findById(req.params.id).populate("user", "email name");
+      const order = await Order.findById(req.params.id).populate(
+        "user",
+        "email name"
+      );
 
       if (!order) {
         return next(new ErrorHandler("Order not found", 400));
@@ -77,7 +95,9 @@ const OrderController = {
       const order = await Order.findById(req.params.id);
 
       if (order.orderStatus === "Delivered") {
-        return next(new ErrorHandler("You have already delivered this order", 400));
+        return next(
+          new ErrorHandler("You have already delivered this order", 400)
+        );
       }
 
       for (const orderItem of order.orderItems) {
@@ -117,7 +137,7 @@ const OrderController = {
     } catch (error) {
       return next(new ErrorHandler("Failed to delete order", 500));
     }
-  }
+  },
 };
 
 module.exports = OrderController;

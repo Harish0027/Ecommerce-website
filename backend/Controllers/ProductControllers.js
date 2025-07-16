@@ -3,7 +3,7 @@ const ProductModel = require("../Model/ProductModel");
 const ErrorHandler = require("../utils/ErrorHandler");
 
 const ProductController = {
-  getAllProducts: async (req, res, next) => {
+  getAllProducts: async (req, res, next) => { 
     try {
       const resultPerPage = 5;
       const productCount = await ProductModel.countDocuments();
