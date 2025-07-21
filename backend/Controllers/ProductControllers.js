@@ -5,7 +5,7 @@ const ErrorHandler = require("../utils/ErrorHandler");
 const ProductController = {
   getAllProducts: async (req, res, next) => { 
     try {
-      const resultPerPage = 5;
+      const resultPerPage = 12;
       const productCount = await ProductModel.countDocuments();
 
       const queryFeature = new ApiFeatures(ProductModel.find(), req.query)
