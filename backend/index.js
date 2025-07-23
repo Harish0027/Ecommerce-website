@@ -12,6 +12,7 @@ const OrderRouter = require("./Routes/OrderRouter");
 const cloudinary=require("cloudinary").v2
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
+const PaymentRouter = require("./Routes/PaymentRoute");
 
 // handling unCaught 
 
@@ -39,6 +40,7 @@ app.use(fileUpload({ useTempFiles: true }));
 app.use("/api/v1/products",ProductRouter);
 app.use("/api/v1/user",UserRouter);
 app.use("/api/v1/Order",OrderRouter);
+app.use("/api/v1/payment",PaymentRouter);
 
 //Error handler
 app.use(ErrorHandler)
