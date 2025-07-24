@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { CarousalData } from "../../../data/CarousalData";
 import "./Carousal.css";
+import {CarousalData} from "../../../data/CarousalData"
 
 const Carousel = () => {
   const [current, setCurrent] = useState(0);
@@ -9,7 +9,6 @@ const Carousel = () => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % CarousalData.length);
     }, 5000);
-
     return () => clearInterval(interval);
   }, []);
 
@@ -19,7 +18,7 @@ const Carousel = () => {
         className="carousel-wrapper"
         style={{
           width: `${CarousalData.length * 100}vw`,
-          transform: `translateX(-${current * 100}vw)`,
+          transform: `translateX(-${current * 100}vw)`
         }}
       >
         {CarousalData.map((item) => (

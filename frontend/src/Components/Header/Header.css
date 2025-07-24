@@ -1,53 +1,68 @@
 /* Header.css */
 
 .navbar {
-  height: 70px;
+  height: 72px;
   width: 100%;
-  background-color: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
   z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2rem;
-  font-family: sans-serif;
+  padding: 0 1.5rem; /* Reduced for better mobile fit */
+  font-family: "Segoe UI", Roboto, sans-serif;
+  transition: all 0.3s ease;
 }
 
-.navbar img {
-  height: 50px;
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 10px; /* ⬅️ Added left padding */
+}
+
+.logo-container img {
+  height: 30px;
   object-fit: contain;
 }
 
-/* Right side: Sign up and cart grouped */
+.logo-container span {
+  font-size: 22px;
+  font-weight: 600;
+  color: #ff6347;
+  letter-spacing: -0.5px;
+}
+
 .navbar-actions {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
 }
 
 /* Sign up button */
 .navbar button {
   background-color: #ff6347;
-  color: white;
+  color: #fff;
   border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
   font-weight: 500;
-  cursor: pointer;
   font-size: 14px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: background-color 0.3s ease;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
 }
 
 .navbar button:hover {
   background-color: #e05239;
+  box-shadow: 0 4px 12px rgba(255, 99, 71, 0.3);
 }
 
-/* Cart icon + label */
+/* Cart */
 .cart-item {
   font-weight: 500;
   font-size: 14px;
@@ -55,4 +70,46 @@
   align-items: center;
   gap: 8px;
   cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background 0.25s ease;
+}
+
+.cart-item:hover {
+  background-color: #f9f9f9;
+}
+
+/* 📱 Mobile Responsiveness */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 1rem;
+  }
+
+  .logo-container span {
+    font-size: 20px;
+  }
+
+  .navbar button {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+  .cart-item {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  .navbar-actions {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-container span {
+    display: none; /* Only show logo icon on very small screens */
+  }
+
+  .navbar {
+    justify-content: space-between;
+  }
 }

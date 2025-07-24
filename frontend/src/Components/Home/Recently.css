@@ -1,0 +1,36 @@
+.recently-product {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.recently-product:hover {
+  transform: translateY(-5px);
+}
+
+.recently-product img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+
+.bottom-banner-product-info {
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.bottom-banner-product-info p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.bottom-banner-product-info span {
+  display: block;
+  font-size: 1.1rem;
+  color: #ff5e57;
+  margin-top: 0.3rem;
+}
