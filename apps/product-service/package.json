@@ -1,0 +1,36 @@
+{
+  "name": "product-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm dlx tsx --env-file=.env --watch src/index.ts",
+    "check-types": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@clerk/backend": "^2.19.1",
+    "@clerk/express": "^1.7.30",
+    "@clerk/fastify": "^2.4.30",
+    "@fastify/cors": "^11.1.0",
+    "@hono/node-server": "^1.19.0",
+    "@repo/kafka": "workspace:*",
+    "@repo/product-db": "workspace:*",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.0.3",
+    "fastify": "^5.5.0",
+    "hono": "^4.9.6",
+    "redis": "^5.9.0",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@repo/types": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3"
+  }
+}
